@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Shove Off!</title>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1d2142}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#1b7fe6 radial-gradient(circle at 50% 20%,#3aa0ff,#1466c8);font-family:'Lilita One','Arial Rounded MT Bold',system-ui,sans-serif;color:#fff}
+main{max-width:420px;margin:0 auto;padding:48px 18px 30px;display:flex;flex-direction:column;align-items:center;gap:20px}
+h1{font-size:52px;margin:0 0 4px;font-weight:normal}
+.o{text-shadow:0 4px 0 var(--ink),2px 0 0 var(--ink),-2px 0 0 var(--ink),0 -2px 0 var(--ink),2px 2px 0 var(--ink),-2px 2px 0 var(--ink),2px -2px 0 var(--ink),-2px -2px 0 var(--ink)}
+p.lead{margin:0;font:600 15px system-ui;opacity:.9;text-align:center}
+a.card{display:block;width:100%;text-decoration:none;color:var(--ink);background:#fff;border:4px solid var(--ink);border-radius:24px;padding:18px 20px;box-shadow:0 7px 0 var(--ink)}
+a.card:active{transform:translateY(5px);box-shadow:0 2px 0 var(--ink)}
+.tag{display:inline-block;background:#ffcf1f;border:3px solid var(--ink);border-radius:14px;padding:2px 12px;font-size:16px}
+.t{font-size:34px;margin:8px 0 4px}
+.d{font:600 15px/1.35 system-ui}
+.hole .tag{background:#1d2142;color:#fff}
+footer{font:600 12px system-ui;opacity:.7;text-align:center}
+</style></head>
+<body><main>
+<h1 class="o">SHOVE OFF!</h1>
+<p class="lead">Push'em All as a grid puzzle. Two versions to compare: pick one.</p>
+<a class="card" href="water.html"><span class="tag">VERSION A</span><div class="t">Water</div>
+<div class="d">Swipe a row or column: the roller shoves everyone in its way off the edge into the water. Fences stop the heap, pillars split it in two.</div></a>
+<a class="card hole" href="hole.html"><span class="tag">VERSION B</span><div class="t">Hole</div>
+<div class="d">Fenced platform with a round black hole. Shove the crowd across the hole to feed it. It grows as it eats, swallowing crowds and pillars in its way.</div></a>
+<footer>15 levels each. While you drag, a preview shows where everyone ends up; Undo, and +1 push when you run out.<br>Portrait, touch or mouse. Each page works on its own (needs internet once for three.js).</footer>
+</main></body></html>
