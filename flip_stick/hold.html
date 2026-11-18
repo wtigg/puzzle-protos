@@ -88,6 +88,7 @@ canvas#c{position:absolute;inset:0;width:100%;height:100%;display:block;touch-ac
 .lv.locked{background:#9aa0b8;color:#5d6380;border-color:#4a5070;cursor:default}
 .lv .st{position:absolute;left:0;right:0;bottom:-7px;font-size:11px;letter-spacing:-1px;text-shadow:none}
 #flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+#bPlus{display:none!important}
 </style>
 </head>
 <body>
@@ -105,7 +106,7 @@ canvas#c{position:absolute;inset:0;width:100%;height:100%;display:block;touch-ac
   </div>
   <div id="flash"></div>
   <div id="win" class="panel"><div class="title out" style="color:#ffd21a">LEVEL<br>COMPLETE!</div><div class="stars">⭐⭐⭐</div><div class="sub out" id="winSub">4/4 fruits sliced</div><div class="row"><button class="btn" id="bNext">NEXT</button><div class="ib winhome" id="bWinHome" title="Home"><svg viewBox="0 0 24 24" fill="#1c2340"><path d="M12 3.2 2.6 11.1a1 1 0 0 0 1.3 1.5L5 11.7V20a1 1 0 0 0 1 1h4.2v-5.6h3.6V21H18a1 1 0 0 0 1-1v-8.3l1.1.9a1 1 0 0 0 1.3-1.5Z"/></svg></div></div></div>
-  <div id="lose" class="panel"><div class="title out" style="font-size:44px" id="loseTitle">OUT OF FLIPS</div><div class="sub out" id="loseSub">Slice every fruit, then stick the finish.</div><button class="btn" id="bPlus">+1 FLIP<small class="ad">&#9654; free in proto (rewarded ad)</small></button><button class="btn blue" id="bUndoL">UNDO LAST FLIP</button><button class="btn orange small" id="bRetry">TRY AGAIN</button></div>
+  <div id="lose" class="panel"><div class="title out" style="font-size:44px" id="loseTitle">OUT OF FLIPS</div><div class="sub out" id="loseSub">Slice every fruit, then stick the finish.</div><button class="btn" id="bPlus">+1 FLIP</button><button class="btn blue" id="bUndoL">UNDO LAST FLIP</button><button class="btn orange small" id="bRetry">TRY AGAIN</button></div>
   <div id="home" class="panel">
     <a id="allGames" href="index.html" class="out">&larr; Versions</a>
     <div class="logo out"><span class="l1">FLIP &amp;</span><span class="l2">STICK!</span></div>

@@ -90,6 +90,7 @@ body{font-family:Fredoka,"Arial Rounded MT Bold","Trebuchet MS",system-ui,sans-s
 #map button.locked{background:#8a94a8;color:#5c6578;cursor:default;box-shadow:none;font-size:calc(4.5*var(--u))}
 #map button i{position:absolute;left:0;right:0;bottom:calc(.3*var(--u));font-style:normal;font-size:calc(3*var(--u));color:#ffb800;-webkit-text-stroke:calc(.2*var(--u)) var(--navy)}
 #map button i span{color:#fff}
+#btnRevive{display:none!important}
 </style>
 </head>
 <body>
@@ -129,7 +130,7 @@ body{font-family:Fredoka,"Arial Rounded MT Bold","Trebuchet MS",system-ui,sans-s
 <div class="ov" id="lose"><div class="card">
   <div class="big red" id="loseTitle">Oops!</div>
   <div class="reason" id="loseReason"></div>
-  <button class="btn blue" id="btnRevive"><span class="ad">▶ AD</span><span id="reviveLbl">+1 Hammer</span></button><br>
+  <button class="btn blue" id="btnRevive"><span id="reviveLbl">+1 Hammer</span></button><br>
   <button class="btn orange small" id="btnRetry">Try again</button>
 </div></div>
 

@@ -84,6 +84,7 @@ html,body{margin:0;height:100%;background:#1b7fe6;overflow:hidden;font-family:'L
 #confetti{position:absolute;inset:0;pointer-events:none;z-index:11}
 #err{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:30px;font-size:22px;background:#1b7fe6}
 #ver{position:absolute;left:0;right:0;bottom:4px;text-align:center;font:600 10px system-ui;opacity:.55;pointer-events:none}
+#btnRevive{display:none!important}
 </style>
 </head>
 <body>
@@ -102,7 +103,7 @@ html,body{margin:0;height:100%;background:#1b7fe6;overflow:hidden;font-family:'L
   <div id="preview"></div><div id="pvSum" class="outline"></div>
   <div id="holeTag" class="outline"></div>
   <div id="winPanel" class="overlay hidden"><div class="stars">&#9733;&#9733;&#9733;</div><div class="big outline">LEVEL<br>COMPLETE!</div><div class="sub outline" id="winSub"></div><button class="btn" id="btnNext">NEXT</button><div id="btnWinHome" class="rbtn" title="Home"><svg width="28" height="28" viewBox="0 0 24 24" fill="#1d2142"><path d="M12 2.5 1.8 11.3c-.6.5-.2 1.4.5 1.4H4V21c0 .6.4 1 1 1h4.5v-6h5v6H19c.6 0 1-.4 1-1v-8.3h1.7c.7 0 1.1-.9.5-1.4z"/></svg></div></div>
-  <div id="losePanel" class="overlay hidden"><div class="big outline">OUT OF<br>PUSHES</div><div class="sub outline" id="loseSub"></div><button class="btn" id="btnRevive">+1 PUSH<small>free in this prototype (rewarded ad)</small></button><button class="btn yellow" id="btnRetry" style="font-size:24px;padding:8px 30px 6px;margin-top:16px">TRY AGAIN</button></div>
+  <div id="losePanel" class="overlay hidden"><div class="big outline">OUT OF<br>PUSHES</div><div class="sub outline" id="loseSub"></div><button class="btn" id="btnRevive">+1 PUSH</button><button class="btn yellow" id="btnRetry" style="font-size:24px;padding:8px 30px 6px;margin-top:16px">TRY AGAIN</button></div>
   <div id="selectPanel" class="overlay hidden"><div class="big outline">HOLE</div><div class="sub outline">Version B - Hole &middot; pick a level</div><div id="grid"></div><button class="btn yellow" id="btnClose" style="font-size:24px;padding:8px 30px 6px">CLOSE</button></div>
   <div id="home" class="hidden">
     <a id="allGames" href="../index.html">&larr; All games</a>
