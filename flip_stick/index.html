@@ -11,8 +11,8 @@ if (navigator.onLine) { const l = document.createElement('link'); l.rel = 'style
 :root{--ink:#1c2340;--yellow:#ffc21a;--green:#2fbf4f;--orange:#ff9a1f;--red:#ff4040}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
 html,body{margin:0;height:100%;overflow:hidden;background:#20263f;font-family:Fredoka,"Arial Rounded MT Bold",system-ui,sans-serif;touch-action:none;overscroll-behavior:none}
-#app{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:min(100vw,calc(100vh * 0.4621));height:100%;overflow:hidden;
-  background:linear-gradient(#6fc3f3 0%,#a9dcfa 40%,#d4f1fd 62%,#d4f1fd 100%)}
+#app{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:min(100vw,calc(100vh * 0.62));height:100%;overflow:hidden;
+  background:linear-gradient(#79c8f5 0%,#a9dcfa 34%,#cdeffd 52%,#cdeffd 100%)}
 canvas#c{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
 .out{color:#fff;text-shadow:3px 0 0 var(--ink),-3px 0 0 var(--ink),0 3px 0 var(--ink),0 -3px 0 var(--ink),2px 2px 0 var(--ink),-2px 2px 0 var(--ink),2px -2px 0 var(--ink),-2px -2px 0 var(--ink),0 5px 0 var(--ink)}
 #hud{position:absolute;inset:0;pointer-events:none}
@@ -31,33 +31,35 @@ canvas#c{position:absolute;inset:0;width:100%;height:100%;display:block;touch-ac
 #melonsN{font-size:32px;font-weight:700;color:var(--yellow);line-height:1;margin-left:auto;white-space:nowrap}
 #melonsN small{font-size:18px;opacity:.85}
 #melons.ok{background:var(--green)}#melons.ok #melonsN{color:#fff}
-#stars3{position:absolute;top:calc(env(safe-area-inset-top) + 9.2% + 62px);right:3.4%;font-weight:700;font-size:13px;color:#fff;background:rgba(28,35,64,.55);padding:3px 9px;border-radius:10px;white-space:nowrap}
-@keyframes bump{40%{transform:scale(1.18)}}
+#stars3{position:absolute;top:calc(env(safe-area-inset-top) + 9.2% + 68px);right:3.4%;font-weight:700;font-size:13px;color:#fff;background:rgba(28,35,64,.55);padding:3px 9px;border-radius:10px;white-space:nowrap}
+@keyframes bump{40%{transform:scale(1.07)}}
 #btns{position:absolute;top:calc(env(safe-area-inset-top) + 9.2% + 66px);left:3.4%;display:flex;gap:8px;pointer-events:auto}
 .ib{width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,.92);border:3px solid var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer}
 .ib svg{width:24px;height:24px}
 .ib.off{opacity:.35}
-#caption{position:absolute;bottom:calc(env(safe-area-inset-bottom) + 2.6%);left:0;right:0;text-align:center;font-weight:700;font-size:22px;letter-spacing:.2px;padding:0 14px;transition:opacity .2s;line-height:1.15}
+#caption{position:absolute;z-index:3;bottom:calc(env(safe-area-inset-bottom) + 2.2%);left:0;right:0;text-align:center;font-weight:700;font-size:16px;letter-spacing:.3px;padding:0 14px;transition:opacity .2s;line-height:1.15}
+#caption.out{text-shadow:2px 0 0 var(--ink),-2px 0 0 var(--ink),0 2px 0 var(--ink),0 -2px 0 var(--ink),0 3px 0 var(--ink)}
 #caption.warn{color:#ffd4d4}
 #caption.good{color:#fff27a}
-#tip{position:absolute;top:calc(env(safe-area-inset-top) + 25.5%);left:50%;transform:translateX(-50%);background:var(--orange);border:4px solid var(--ink);border-radius:16px;box-shadow:0 5px 0 var(--ink);padding:6px 16px;font-weight:700;font-size:19px;text-align:center;width:max-content;max-width:88%;display:none;line-height:1.15}
-#combo{position:absolute;z-index:5;left:0;right:0;top:30%;text-align:center;font-weight:700;font-size:64px;opacity:0;color:#ffd21a;pointer-events:none}
+#tip{position:absolute;bottom:calc(env(safe-area-inset-bottom) + 2.2% + 30px);left:50%;transform:translateX(-50%);background:var(--orange);border:4px solid var(--ink);border-radius:16px;box-shadow:0 5px 0 var(--ink);padding:4px 12px;font-weight:700;font-size:15px;text-align:center;width:max-content;max-width:88%;display:none;line-height:1.15;border-width:3px;box-shadow:0 3px 0 var(--ink)}
+#combo{position:absolute;z-index:5;left:0;right:0;top:calc(env(safe-area-inset-top) + 9.2% + 140px);line-height:1.05;transform-origin:50% 0;text-align:center;font-weight:700;font-size:64px;opacity:0;color:#ffd21a;pointer-events:none}
 #combo.pop{animation:pop .8s ease-out forwards}
 @keyframes pop{0%{opacity:0;transform:scale(.3) rotate(-8deg)}18%{opacity:1;transform:scale(1.3) rotate(3deg)}32%{transform:scale(1) rotate(-2deg)}75%{opacity:1;transform:scale(1) translateY(-8px)}100%{opacity:0;transform:scale(.95) translateY(-30px)}}
 #hand{position:absolute;font-size:58px;line-height:1;pointer-events:none;display:none;transform:translate(-30%,-4%);filter:drop-shadow(0 3px 0 rgba(0,0,0,.25));z-index:4}
 #hand .h{display:inline-block;animation:press 1.3s infinite}
 @keyframes press{0%,100%{transform:translateY(14px) scale(1)}45%{transform:translateY(0) scale(.92)}70%{transform:translateY(0) scale(.92)}}
 /* outcome badges above every reachable landing spot */
-#badges{position:absolute;inset:0;pointer-events:none}
-.bdg{position:absolute;transform:translate(-50%,-100%);display:flex;align-items:center;gap:1px;font-weight:700;font-size:19px;line-height:1;padding:3px 6px;border-radius:13px;border:3px solid var(--ink);background:#ffd21a;color:var(--ink);white-space:nowrap;transition:transform .12s}
-.bdg svg{width:15px;height:15px}
-.bdg.ring{background:transparent;border:none;padding:0}
-.bdg.ring i{display:block;width:22px;height:22px;border-radius:50%;border:4px solid #fff;box-shadow:0 0 0 2px rgba(28,35,64,.6);transform:translateY(12px)}
-.bdg.fin{background:var(--green);color:#fff}
-.bdg.lock{background:#5a6080;color:#fff}
-.bdg.bnc{background:#45eaff}
-.bdg.sel{transform:translate(-50%,-100%) scale(1.25);z-index:2}
-.bdg.dim{opacity:.35}
+#badges{position:absolute;inset:0;pointer-events:none;transition:opacity .22s}
+#badges.hide{opacity:0}
+.bdg{position:absolute;transform:translate(-50%,-100%);display:flex;align-items:center;gap:1px;font-weight:700;font-size:14px;line-height:1;padding:2px 6px;border-radius:10px;border:2px solid rgba(28,35,64,.75);background:rgba(255,214,40,.85);color:var(--ink);white-space:nowrap;opacity:.88;transition:transform .12s,opacity .12s;box-shadow:0 2px 0 rgba(28,35,64,.25)}
+.bdg.ring{background:transparent;border:none;padding:0;box-shadow:none;display:none}
+#badges.aim .bdg.ring{display:block}
+.bdg.ring i{display:block;width:20px;height:20px;border-radius:50%;border:3px solid rgba(255,255,255,.95);box-shadow:0 0 0 2px rgba(28,35,64,.45);transform:translateY(10px)}
+.bdg.fin{background:rgba(47,191,79,.88);color:#fff}
+.bdg.lock{background:rgba(90,96,128,.82);color:#fff}
+.bdg.bnc{background:rgba(69,234,255,.85)}
+.bdg.sel{transform:translate(-50%,-100%) scale(1.3);z-index:2;opacity:1}
+.bdg.dim{opacity:.3}
 .bdg.ring.sel i{border-color:#ffd21a}
 .panel{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;pointer-events:auto;background:rgba(18,24,48,.35)}
 .panel.show{display:flex;animation:fadein .25s}
@@ -87,7 +89,7 @@ canvas#c{position:absolute;inset:0;width:100%;height:100%;display:block;touch-ac
 .lv.done{background:var(--green);color:#fff}
 .lv.locked{background:#9aa0b8;color:#5d6380;border-color:#4a5070;cursor:default}
 .lv .st{position:absolute;left:0;right:0;bottom:-9px;font-size:11px;letter-spacing:-1px;text-shadow:none}
-#finTag{position:absolute;transform:translate(-50%,-100%);font-weight:700;font-size:15px;padding:3px 9px;border-radius:12px;border:3px solid var(--ink);background:#5a6080;color:#fff;white-space:nowrap;pointer-events:none;display:none}
+#finTag{position:absolute;transform:translate(-50%,-100%);font-weight:700;font-size:13px;padding:2px 7px;border-radius:10px;border:2px solid rgba(28,35,64,.75);background:rgba(90,96,128,.85);opacity:.9;color:#fff;white-space:nowrap;pointer-events:none;display:none}
 #finTag.open{background:var(--green)}
 #flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
 </style>
@@ -257,15 +259,23 @@ const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true 
 renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 const scene = new THREE.Scene();
-scene.fog = new THREE.Fog(0xd4f1fd, 60, 120);
-const camera = new THREE.PerspectiveCamera(28, 0.46, 0.5, 300);
+scene.fog = new THREE.Fog(0xcdeffd, 34, 80);
+const camera = new THREE.PerspectiveCamera(40, 0.46, 0.3, 300);
 scene.add(new THREE.HemisphereLight(0xe8f6ff, 0x5aa040, 0.55));
 const sun = new THREE.DirectionalLight(0xffffff, 0.8); sun.castShadow = true;
-sun.shadow.mapSize.set(1024, 1024); Object.assign(sun.shadow.camera, { left: -10, right: 10, top: 12, bottom: -4, near: 1, far: 60 }); sun.shadow.bias = -0.0008; sun.shadow.normalBias = 0.02;
+sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, { left: -12, right: 12, top: 12, bottom: -12, near: 1, far: 70 }); sun.shadow.bias = -0.0008; sun.shadow.normalBias = 0.02;
 scene.add(sun); scene.add(sun.target);
 scene.add(new THREE.AmbientLight(0xffffff, 0.1));
 
 const GROUND_Y = -0.9, MR = 0.42; // melon radius (cell = 1)
+// ------------------------------------------------------------------ the course: columns sit along a gently winding path that
+// recedes into depth (Slice It All look). Column index x (fractional during flight) -> world point on the path.
+// The rules stay 1D: everything that was drawn at (x, y) in the side view is drawn at (pathX(x), y, pathZ(x)).
+const _q = new URLSearchParams(location.search); const SP = +(_q.get('sp') || 1.35), CURVE_A = 0.8, CURVE_W = 0.42; let curvePh = 0;
+function pathX(x) { return x * SP; }
+function pathZ(x) { return -CURVE_A * Math.sin(x * CURVE_W + curvePh) + CURVE_A * Math.sin(curvePh); }
+function pathYaw(x) { const dx = SP, dz = -CURVE_A * CURVE_W * Math.cos(x * CURVE_W + curvePh); return Math.atan2(-dz, dx); }
+function W3(x, y, out) { return (out || new THREE.Vector3()).set(pathX(x), y, pathZ(x)); }
 function canvasTex(w, h, draw) { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const t = new THREE.CanvasTexture(c); t.anisotropy = 4; return t; }
 function rng(seed) { let s = seed >>> 0; return () => { s = (s + 0x6D2B79F5) >>> 0; let t = s; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 const melonTex = canvasTex(256, 128, (g, w, h) => {
@@ -332,32 +342,44 @@ const M = {
   dirt: new THREE.MeshLambertMaterial({ color: 0xd9b26a })
 };
 
-// ------------------------------------------------------------------ static world: grass, trees and mountains behind the course
+// ------------------------------------------------------------------ static world (v1 look: mottled grass, rocks, bushes, low-poly forest, icy peaks)
+M.groundDark = new THREE.MeshLambertMaterial({ color: 0x5fd84f });
 (function world() {
   const r = rng(42);
-  const g = new THREE.Mesh(new THREE.PlaneGeometry(200, 140), new THREE.MeshLambertMaterial({ color: 0x7ee86a })); g.rotation.x = -Math.PI / 2; g.position.set(10, GROUND_Y, -50); g.receiveShadow = true; scene.add(g);
-  const front = new THREE.Mesh(new THREE.PlaneGeometry(200, 12), new THREE.MeshLambertMaterial({ color: 0x64d454 })); front.rotation.x = -Math.PI / 2; front.position.set(10, GROUND_Y + 0.002, 7); scene.add(front);
+  const gg = new THREE.PlaneGeometry(170, 130, 170, 130); gg.rotateX(-Math.PI / 2);
+  const gp = gg.attributes.position, col = new Float32Array(gp.count * 3);
+  const cA = new THREE.Color(0x86f56c), cB = new THREE.Color(0x4fc94a), cC = new THREE.Color(0x3aa83d), tmpc = new THREE.Color();
+  for (let i = 0; i < gp.count; i++) {
+    const x = gp.getX(i) + 10, z = gp.getZ(i) - 8;
+    const n = Math.sin(x * 0.7 + Math.sin(z * 0.9)) * Math.sin(z * 0.6 + x * 0.21) * 0.5 + Math.sin(x * 2.3 + z * 1.7) * 0.15;
+    const d = Math.min(1, Math.max(0, (Math.abs(z) - 2.6) / 14));
+    tmpc.copy(cA).lerp(cB, Math.min(1, d * 1.2 + Math.max(0, n) * 0.35)); if (d > 0.6) tmpc.lerp(cC, (d - 0.6) * 1.6);
+    col[i * 3] = tmpc.r; col[i * 3 + 1] = tmpc.g; col[i * 3 + 2] = tmpc.b;
+  }
+  gg.setAttribute('color', new THREE.BufferAttribute(col, 3));
+  const g = new THREE.Mesh(gg, new THREE.MeshLambertMaterial({ vertexColors: true })); g.position.set(10, GROUND_Y, -8); g.receiveShadow = true; scene.add(g);
+  for (let i = 0; i < 30; i++) { const p = new THREE.Mesh(new THREE.CircleGeometry(0.6 + r() * 1.6, 9), M.groundDark); p.rotation.x = -Math.PI / 2; p.scale.y = 0.5 + r() * 0.5; const z = r() < 0.5 ? -3 - r() * 14 : 2.6 + r() * 6; p.position.set(-12 + r() * 46, GROUND_Y + 0.004, z); scene.add(p); }
+  for (let i = 0; i < 70; i++) { // rocks and bushes on both sides of the course
+    const side = r() < 0.6 ? -1 : 1, z = side * (2.3 + r() * (side < 0 ? 6 : 4)), x = -8 + r() * 36;
+    if (r() < 0.5) { const k = new THREE.Mesh(new THREE.DodecahedronGeometry(0.08 + r() * 0.17, 0), M.rock); k.position.set(x, GROUND_Y + 0.03, z); k.rotation.set(r() * 3, r() * 3, 0); k.castShadow = true; scene.add(k); }
+    else { const b = new THREE.Group(); const n = 2 + Math.floor(r() * 3); for (let j = 0; j < n; j++) { const s2 = 0.18 + r() * 0.24; const m = new THREE.Mesh(new THREE.IcosahedronGeometry(s2, 0), M.bush[Math.floor(r() * 2)]); m.position.set((r() - 0.5) * 0.6, s2 * 0.6, (r() - 0.5) * 0.4); m.castShadow = true; b.add(m); } b.position.set(x, GROUND_Y, z); scene.add(b); }
+  }
   function pine(x, z, s) {
     const t = new THREE.Group();
     const tr = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.16, 0.8, 6), M.trunk); tr.position.y = 0.4; t.add(tr);
     const m = M.pine[Math.floor(r() * 3)];
-    [[1.25, 1.5, 1.2], [1.0, 1.3, 2.0], [0.7, 1.1, 2.7]].forEach(([rad, hh, y]) => { const c = new THREE.Mesh(new THREE.ConeGeometry(rad, hh, 8), m); c.position.y = y; t.add(c); });
+    [[1.25, 1.5, 1.2], [1.0, 1.3, 2.0], [0.7, 1.1, 2.7]].forEach(([rad, hh, y]) => { const c = new THREE.Mesh(new THREE.ConeGeometry(rad, hh, 8), m); c.position.y = y; c.castShadow = true; t.add(c); });
     t.position.set(x, GROUND_Y, z); t.scale.setScalar(s); t.rotation.y = r() * 6; scene.add(t);
   }
   function round(x, z, s) {
     const t = new THREE.Group();
     const tr = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.18, 1.5, 6), M.trunk); tr.position.y = 0.75; t.add(tr);
-    const c = new THREE.Mesh(new THREE.IcosahedronGeometry(1.25, 0), M.leaf[Math.floor(r() * 2)]); c.position.y = 2.3; t.add(c);
+    const c = new THREE.Mesh(new THREE.IcosahedronGeometry(1.25, 0), M.leaf[Math.floor(r() * 2)]); c.position.y = 2.3; c.castShadow = true; t.add(c);
     t.position.set(x, GROUND_Y, z); t.scale.setScalar(s); t.rotation.y = r() * 6; scene.add(t);
   }
-  for (let i = 0; i < 90; i++) { const x = -16 + r() * 52, z = -7 - r() * 26; (r() < 0.6 ? pine : round)(x, z, 1.1 + r() * 0.9); }
-  for (let i = 0; i < 40; i++) { // bushes and pebbles along the course
-    const x = -6 + r() * 30, z = -1.6 - r() * 3.5;
-    const b = new THREE.Group(); const n = 2 + Math.floor(r() * 3);
-    for (let j = 0; j < n; j++) { const m = new THREE.Mesh(new THREE.IcosahedronGeometry(0.22 + r() * 0.25, 0), M.bush[Math.floor(r() * 2)]); m.position.set((r() - 0.5) * 0.6, 0.1, (r() - 0.5) * 0.4); b.add(m); }
-    b.position.set(x, GROUND_Y, z); scene.add(b);
-  }
-  for (let i = 0; i < 11; i++) { const m = new THREE.Mesh(new THREE.ConeGeometry(12 + r() * 9, 14 + r() * 12, 5), r() < 0.5 ? M.ice : M.ice2); m.position.set(-30 + i * 9 + r() * 4, GROUND_Y + 5, -75 - r() * 10); m.rotation.y = r() * 6; scene.add(m); }
+  for (let i = 0; i < 95; i++) { const x = -14 + r() * 50, z = -4.6 - r() * 20; (r() < 0.62 ? pine : round)(x, z, 0.85 + r() * 0.75); }
+  for (let i = 0; i < 26; i++) { const x = -14 + r() * 50, z = 5.5 + r() * 9; (r() < 0.6 ? pine : round)(x, z, 0.8 + r() * 0.5); }
+  for (let i = 0; i < 10; i++) { const m = new THREE.Mesh(new THREE.ConeGeometry(9 + r() * 8, 10 + r() * 9, 5), r() < 0.5 ? M.ice : M.ice2); m.position.set(-20 + i * 8 + r() * 4, GROUND_Y + 3, -50 - r() * 10); m.rotation.y = r() * 6; scene.add(m); }
 })();
 
 // ------------------------------------------------------------------ level meshes
@@ -369,36 +391,49 @@ function makeMelon() {
   const st = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.04, 0.1, 6), M.stem); st.position.y = MR; g.add(st);
   s.rotation.y = Math.random() * 6; return g;
 }
+function colGroup(x) { const g = new THREE.Group(); g.position.set(pathX(x), 0, pathZ(x)); g.rotation.y = pathYaw(x); levelRoot.add(g); return g; }
 function buildLevel() {
   if (levelRoot) scene.remove(levelRoot);
   levelRoot = new THREE.Group(); scene.add(levelRoot); melons = {};
-  const dirt = new THREE.Mesh(new THREE.PlaneGeometry(L.W + 3, 1.6), M.dirt); dirt.rotation.x = -Math.PI / 2; dirt.position.set((L.W - 1) / 2, GROUND_Y + 0.004, 0); dirt.receiveShadow = true; levelRoot.add(dirt);
+  { // ragged dirt path along the winding course
+    const r = rng(L.W * 7 + 3), x0 = -1.6, x1 = L.W + 0.6, N = Math.ceil((x1 - x0) * 4), pos = [], idx = [];
+    for (let i = 0; i <= N; i++) {
+      const x = x0 + (x1 - x0) * i / N, yaw = pathYaw(x), nx = Math.sin(yaw), nz = Math.cos(yaw); // normal to the path, in the ground plane
+      const wl = 0.82 + r() * 0.18, wr = 0.82 + r() * 0.18, cx = pathX(x), cz = pathZ(x);
+      pos.push(cx - nx * wl, GROUND_Y + 0.006, cz - nz * wl, cx + nx * wr, GROUND_Y + 0.006, cz + nz * wr);
+      if (i) { const k = i * 2; idx.push(k - 2, k, k - 1, k - 1, k, k + 1); }
+    }
+    const gg = new THREE.BufferGeometry(); gg.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); gg.setIndex(idx); gg.computeVertexNormals();
+    const m = new THREE.Mesh(gg, M.dirtPath || (M.dirtPath = new THREE.MeshLambertMaterial({ color: 0xe8c27a, side: THREE.DoubleSide }))); m.receiveShadow = true; levelRoot.add(m);
+    for (let i = 0; i < L.W * 3; i++) { const x = x0 + r() * (x1 - x0), o = (r() - 0.5) * 1.5, yaw = pathYaw(x); const k = new THREE.Mesh(new THREE.DodecahedronGeometry(0.03 + r() * 0.05, 0), M.rock); k.position.set(pathX(x) + Math.sin(yaw) * o, GROUND_Y + 0.02, pathZ(x) + Math.cos(yaw) * o); levelRoot.add(k); }
+  }
   L.cols.forEach(([k, h], x) => {
-    const H = h - GROUND_Y;
+    const H = h - GROUND_Y; const g = colGroup(x);
     if (k === 'W') {
-      const cyl = new THREE.Mesh(new THREE.CylinderGeometry(0.37, 0.39, H, 24, 1), [M.bark, M.ringTop, M.bark]);
-      cyl.position.set(x, h - H / 2, 0); cyl.castShadow = cyl.receiveShadow = true; levelRoot.add(cyl);
+      const cyl = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.44, H, 24, 1), [M.bark, M.ringTop, M.bark]);
+      cyl.position.set(0, h - H / 2, 0); cyl.castShadow = cyl.receiveShadow = true; g.add(cyl);
     } else if (k === 'S') { // stone pillar with spikes: the knife cannot stick here
-      const b = boxOn(0.8, H - 0.06, 0.8, M.stone, x, h - 0.06); b.material = M.stone.clone(); b.material.map = stoneTex.clone(); b.material.map.needsUpdate = true; b.material.map.repeat.set(1, H / 2.4); levelRoot.add(b);
-      levelRoot.add(boxOn(0.88, 0.1, 0.88, M.stoneTop, x, h));
-      for (const dx of [-0.3, 0, 0.3]) { const s = new THREE.Mesh(new THREE.ConeGeometry(0.1, 0.3, 6), M.spike); s.position.set(x + dx, h + 0.15, 0); s.castShadow = true; levelRoot.add(s); }
+      const b = boxOn(0.84, H - 0.06, 0.84, M.stone, 0, h - 0.06); b.material = M.stone.clone(); b.material.map = stoneTex.clone(); b.material.map.needsUpdate = true; b.material.map.repeat.set(1, H / 2.4); g.add(b);
+      g.add(boxOn(0.92, 0.1, 0.92, M.stoneTop, 0, h));
+      for (const dx of [-0.28, 0.28]) for (const dz of [-0.28, 0.28]) { const sp = new THREE.Mesh(new THREE.ConeGeometry(0.1, 0.34, 6), M.spike); sp.position.set(dx, h + 0.17, dz); sp.castShadow = true; g.add(sp); }
+      { const sp = new THREE.Mesh(new THREE.ConeGeometry(0.12, 0.42, 6), M.spike); sp.position.set(0, h + 0.21, 0); sp.castShadow = true; g.add(sp); }
     } else if (k === 'M') { // bounce pad
-      levelRoot.add(boxOn(0.76, H - 0.16, 0.76, M.metal, x, h - 0.16));
-      const sp = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.12, 16), M.spring); sp.position.set(x, h - 0.1, 0); levelRoot.add(sp);
-      for (const yy of [0.35, 0.6]) { const st = new THREE.Mesh(new THREE.BoxGeometry(0.78, 0.08, 0.78), M.spring); st.position.set(x, h - yy, 0); if (h - yy > GROUND_Y) levelRoot.add(st); }
-      const top = boxOn(0.86, 0.08, 0.86, M.metalTop, x, h); levelRoot.add(top);
+      g.add(boxOn(0.8, H - 0.16, 0.8, M.metal, 0, h - 0.16));
+      const sp = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.12, 16), M.spring); sp.position.set(0, h - 0.1, 0); g.add(sp);
+      for (const yy of [0.35, 0.6]) { const st = new THREE.Mesh(new THREE.BoxGeometry(0.82, 0.08, 0.82), M.spring); st.position.set(0, h - yy, 0); if (h - yy > GROUND_Y) g.add(st); }
+      const top = boxOn(0.9, 0.08, 0.9, M.metalTop, 0, h); g.add(top);
       levelRoot.userData['pad' + x] = top;
     } else if (k === 'F') {
-      levelRoot.add(boxOn(0.78, H - 0.1, 0.78, M.fpost, x, h - 0.1));
-      const bd = boxOn(0.9, 0.12, 0.9, M.boardLocked, x, h); levelRoot.add(bd); levelRoot.userData.board = bd; levelRoot.userData.finish = [x, h];
-      const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 1.6, 8), M.spike); pole.position.set(x + 0.36, h + 0.8, -0.3); levelRoot.add(pole);
+      g.add(boxOn(0.82, H - 0.1, 0.82, M.fpost, 0, h - 0.1));
+      const bd = boxOn(0.96, 0.12, 0.96, M.boardLocked, 0, h); g.add(bd); levelRoot.userData.board = bd; levelRoot.userData.finish = [x, h];
+      const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 1.6, 8), M.spike); pole.position.set(0.36, h + 0.8, -0.36); g.add(pole);
       const fl = new THREE.Mesh(new THREE.PlaneGeometry(0.55, 0.38, 8, 1), new THREE.MeshStandardMaterial({ map: flagTex, side: THREE.DoubleSide, roughness: 0.8 }));
-      fl.position.set(x + 0.64, h + 1.4, -0.3); levelRoot.add(fl); levelRoot.userData.flag = fl;
+      fl.position.set(0.64, h + 1.4, -0.36); g.add(fl); levelRoot.userData.flag = fl;
     }
   });
   L.stack.forEach((n, x) => {
     const h = L.h(x);
-    for (let j = 0; j < n; j++) { const m = makeMelon(); m.position.set(x, h + j + 0.47, 0); levelRoot.add(m); melons[x + ',' + j] = { mesh: m, x, j, y: h + j + 0.47, sliced: false }; }
+    for (let j = 0; j < n; j++) { const m = makeMelon(); W3(x, h + j + 0.47, m.position); levelRoot.add(m); melons[x + ',' + j] = { mesh: m, x, j, y: h + j + 0.47, sliced: false }; }
   });
 }
 
@@ -418,10 +453,10 @@ const knife = new THREE.Group(); const knifeBody = new THREE.Group(); knife.add(
 scene.add(knife);
 const TIP_SINK = 0.2, PIV = 0.5 * 1.45;
 let knifeLean = -0.12, wobT = 9;
-function placeKnifeAt(x, y, ang) { // tip at (x, y - sink) when ang = 0, rotating around the tip
-  knife.position.set(x - Math.sin(ang) * PIV, y - TIP_SINK + Math.cos(ang) * PIV, 0.05); knife.rotation.z = ang;
+function placeKnifeAt(x, y, ang) { // tip at (x, y - sink) when ang = 0, rotating around the tip; the spin plane follows the path
+  const yaw = pathYaw(x), o = -Math.sin(ang) * PIV;
+  knife.position.set(pathX(x) + Math.cos(yaw) * o, y - TIP_SINK + Math.cos(ang) * PIV, pathZ(x) - Math.sin(yaw) * o); knife.rotation.set(0, yaw, ang);
 }
-function placeKnifeCenter(x, y, ang) { knife.position.set(x, y, 0.05); knife.rotation.z = ang; }
 
 // ------------------------------------------------------------------ the arc: one fixed shape, shared by preview and flight
 // Parabola from (xa, ya) to (xb, yb) whose height over every column in between clears the rule's clearance line
@@ -442,7 +477,7 @@ const haloMat = new THREE.MeshBasicMaterial({ color: 0xfff27a, transparent: true
 const halos = []; for (let i = 0; i < 8; i++) { const h = new THREE.Mesh(haloGeo, haloMat); h.visible = false; h.renderOrder = 4; scene.add(h); halos.push(h); }
 const xMat = new THREE.MeshBasicMaterial({ color: 0xff3030, depthTest: false, transparent: true });
 const xMark = new THREE.Group(); for (const a of [0.785, -0.785]) { const b = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.13, 0.05), xMat); b.rotation.z = a; xMark.add(b); } xMark.visible = false; xMark.renderOrder = 9; scene.add(xMark);
-const wallGlow = new THREE.Mesh(new THREE.BoxGeometry(1.04, 1, 1.04), new THREE.MeshBasicMaterial({ color: 0xff3030, transparent: true, opacity: 0.35, depthWrite: false })); wallGlow.visible = false; scene.add(wallGlow);
+const wallGlow = new THREE.Mesh(new THREE.BoxGeometry(1.06, 1, 1.06), new THREE.MeshBasicMaterial({ color: 0xff3030, transparent: true, opacity: 0.35, depthWrite: false })); wallGlow.visible = false; scene.add(wallGlow);
 
 // ------------------------------------------------------------------ particles
 const parts = [], halves = [];
@@ -454,55 +489,92 @@ function burst(x, y, z, n, colors, o) {
   for (let i = 0; i < n; i++) {
     const c = colors[Math.floor(Math.random() * colors.length)];
     const m = new THREE.Mesh(o.cube ? cubeGeo : partGeo, pmat(c, o.basic)); const s = (o.size || 0.06) * (0.6 + Math.random() * 0.8); m.scale.setScalar(s);
-    m.position.set(x, y, z); scene.add(m);
+    W3(x, y, m.position); scene.add(m); // x = column index on the path
     const a = Math.random() * Math.PI * 2, e = (o.up || 0.5) + Math.random() * 0.6, sp = (o.speed || 3) * (0.4 + Math.random() * 0.8);
-    parts.push({ m, v: new THREE.Vector3(Math.cos(a) * sp, e * sp, Math.sin(a) * sp * 0.4), life: (o.life || 0.9) * (0.6 + Math.random() * 0.6), t: 0, s, g: o.g == null ? 9 : o.g, spin: o.cube ? 10 : 0 });
+    parts.push({ m, v: new THREE.Vector3(Math.cos(a) * sp, e * sp, Math.sin(a) * sp * 0.8), life: (o.life || 0.9) * (0.6 + Math.random() * 0.6), t: 0, s, g: o.g == null ? 9 : o.g, spin: o.cube ? 10 : 0 });
   }
 }
 function sliceMelon(ob, n) {
   ob.sliced = true; ob.mesh.visible = false; const p = ob.mesh.position;
-  for (const side of [1, -1]) { // halves fly left / right, flesh facing the camera side
+  const rt = new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld, 0); rt.y = 0; rt.normalize(); const ry = Math.atan2(-rt.z, rt.x);
+  for (const side of [1, -1]) { // halves fly to the screen left / right, flesh facing each other
     const g = new THREE.Group();
     const hemi = new THREE.Mesh(new THREE.SphereGeometry(MR, 24, 14, 0, Math.PI), M.melon); hemi.rotation.y = side > 0 ? -Math.PI / 2 : Math.PI / 2; hemi.castShadow = true; g.add(hemi);
     const cap = new THREE.Mesh(new THREE.CircleGeometry(MR - 0.005, 28), M.flesh); cap.rotation.y = Math.PI / 2; g.add(cap);
-    g.position.copy(p); g.position.x += side * 0.05; scene.add(g);
-    halves.push({ g, v: new THREE.Vector3(side * (2.2 + Math.random() * 1.2 + n * 0.2), 2.4 + Math.random() * 1.4, 0.6 + Math.random()), w: new THREE.Vector3((Math.random() - 0.5) * 3, (Math.random() - 0.5) * 2, -side * (5 + Math.random() * 4)), t: 0 });
+    g.position.copy(p).addScaledVector(rt, side * 0.05); g.rotation.y = ry; scene.add(g);
+    const sv = side * (2.2 + Math.random() * 1.2 + n * 0.2);
+    halves.push({ g, v: new THREE.Vector3(rt.x * sv, 2.4 + Math.random() * 1.4, rt.z * sv).addScaledVector(new THREE.Vector3(-rt.z, 0, rt.x), 0.4 * Math.random()), w: new THREE.Vector3((Math.random() - 0.5) * 3, (Math.random() - 0.5) * 2, -side * (5 + Math.random() * 4)), t: 0 });
   }
-  burst(p.x, p.y, p.z + 0.2, 26 + n * 4, [0xff3350, 0xff5a6e, 0xff8a9a, 0xe0203a], { speed: 3.6, size: 0.06, life: 0.8, up: 0.4 });
-  burst(p.x, p.y, p.z + 0.2, 8, [0xffffff, 0xc8f0a6], { speed: 2.4, size: 0.045, life: 0.5, up: 0.4 });
+  burst(ob.x, p.y, 0, 26 + n * 4, [0xff3350, 0xff5a6e, 0xff8a9a, 0xe0203a], { speed: 3.6, size: 0.06, life: 0.8, up: 0.4 });
+  burst(ob.x, p.y, 0, 8, [0xffffff, 0xc8f0a6], { speed: 2.4, size: 0.045, life: 0.5, up: 0.4 });
 }
 function flashScreen(a) { const f = $('flash'); f.style.transition = 'none'; f.style.opacity = a; requestAnimationFrame(() => { f.style.transition = 'opacity .35s'; f.style.opacity = 0; }); }
 
-// ------------------------------------------------------------------ camera: fixed zoom, side view, slides with the knife.
-// Every reachable spot (R columns each side) is always on screen.
-const cam = { x: 0, tx: 0, shake: 0, punch: 0, settled: false, ly: 4.5 };
-const HALF_W = R + 1.25; let CAM_D = 30;
+// ------------------------------------------------------------------ camera: 3/4 view from behind and above the knife (v1 / Slice It All).
+// One zoom per level, chosen so the knife and every column it can reach (R each side) stay inside the play area
+// between the top HUD and the bottom caption, badges included. At runtime the camera only glides (eased) along the path.
+const cam = { x: 0, tx: 0, ly: 1, tly: 1, z: 1, tz: 1, shake: 0, punch: 0, settled: false };
+const CAM_OFF = new THREE.Vector3(...(_q.get('cam') || '-7,12.5,7').split(',').map(Number));
+const camLy = [], camFx = [], camZ = [];
+const SAFE = { l: -0.96, r: 0.96, b: -0.86, t: 0.5 };
 function shake(a) { cam.shake = Math.max(cam.shake, a); }
-function focusX(x) { if (L.W - 1 <= 2 * (HALF_W - 0.75)) return (L.W - 1) / 2; return Math.min(Math.max(x, HALF_W - 0.75), L.W - 1 - (HALF_W - 0.75)); }
-function camPose() {
-  const sx = (Math.random() - 0.5) * cam.shake * 0.3, sy = (Math.random() - 0.5) * cam.shake * 0.3;
-  const d = CAM_D * (1 - cam.punch);
-  camera.position.set(cam.x + sx, cam.ly + d * 0.13 + sy, d); camera.lookAt(cam.x + sx * 0.5, cam.ly, 0);
+const tmpCam = new THREE.PerspectiveCamera(); const tv3 = new THREE.Vector3();
+function camPose(c, fx, z, ly, sx, sy) {
+  const px = pathX(fx), pz = pathZ(fx);
+  c.position.set(px + CAM_OFF.x * z + (sx || 0), ly + CAM_OFF.y * z + (sy || 0), pz + CAM_OFF.z * z);
+  c.lookAt(px + (sx || 0) * 0.5, ly, pz);
 }
+const BACK = 2; // forward reach (R) always framed; 2 columns back framed too (3 back is rare and still shows its badge when on screen)
+function windowPts(p) {
+  const pts = [[p, L.h(p) + 1.3]];
+  for (let c = Math.max(0, p - BACK); c <= Math.min(L.W - 1, p + R); c++) { const t = Math.max(L.h(c), L.h(c) + L.stack[c]); pts.push([c, t + 0.95], [c, GROUND_Y + 0.1]); }
+  return pts;
+}
+function boxAt(fx, z, ly, pts) {
+  camPose(tmpCam, fx, z, ly); tmpCam.updateMatrixWorld(); let l = 9, r = -9, b = 9, t = -9;
+  for (const [x, y] of pts) for (const o of [-0.5, 0.5]) { tv3.set(pathX(x) + o * 0.7, y, pathZ(x) + o * 0.7).project(tmpCam); l = Math.min(l, tv3.x); r = Math.max(r, tv3.x); b = Math.min(b, tv3.y); t = Math.max(t, tv3.y); }
+  return { l, r, b, t };
+}
+const fits = q => q.l > SAFE.l && q.r < SAFE.r && q.b > SAFE.b && q.t < SAFE.t;
+function bestPose(p, z) { // best (fx, ly) for spot p at zoom z, or null
+  const pts = windowPts(p); let best = null, be = 1e9;
+  for (let fx = p - 0.5; fx <= p + 1.51; fx += 0.25) for (let ly = -1; ly <= 6; ly += 0.25) {
+    const q = boxAt(fx, z, ly, pts); if (!fits(q)) continue;
+    const e = Math.abs((q.t + q.b) / 2 - (SAFE.t + SAFE.b) / 2) + Math.abs((q.l + q.r) / 2) * 0.6 + Math.abs(fx - p - 0.5) * 0.05;
+    if (e < be) { be = e; best = { fx, ly }; }
+  }
+  return best;
+}
+function levelCamera() { // per spot: the closest zoom that still fits the knife + every reachable column; the camera eases between spots
+  tmpCam.copy(camera);
+  for (let p = 0; p < L.W; p++) {
+    let lo = 0.4, hi = 2.6; for (let it = 0; it < 11; it++) { const z = (lo + hi) / 2; if (bestPose(p, z)) hi = z; else lo = z; }
+    const z = Math.max(0.9, hi * 1.02); const b = bestPose(p, z) || { fx: p + 0.5, ly: 2 };
+    camZ[p] = z; camFx[p] = b.fx; camLy[p] = b.ly;
+  }
+}
+function camFollow(p) { cam.tx = camFx[p]; cam.tly = camLy[p]; cam.tz = camZ[p]; }
+function camFly(x) { const a = Math.max(0, Math.min(L.W - 1, Math.floor(x))), b = Math.min(L.W - 1, a + 1), f = Math.max(0, Math.min(1, x - a)); const lerp = (o) => o[a] + (o[b] - o[a]) * f; cam.tx = lerp(camFx); cam.tly = lerp(camLy); cam.tz = Math.max(lerp(camZ), cam.tz * 0.98); }
 let homeT = 0;
 function updateCamera(dt) {
-  const k = 1 - Math.exp(-dt * 5); cam.x += (cam.tx - cam.x) * k;
-  cam.settled = Math.abs(cam.tx - cam.x) < 0.01;
+  const k = 1 - Math.exp(-dt * 4); cam.x += (cam.tx - cam.x) * k; cam.ly += (cam.tly - cam.ly) * k; cam.z += (cam.tz - cam.z) * k;
+  cam.settled = Math.abs(cam.tx - cam.x) < 0.01 && Math.abs(cam.tly - cam.ly) < 0.01 && Math.abs(cam.tz - cam.z) < 0.004;
   cam.shake *= Math.exp(-dt * 9); cam.punch *= Math.exp(-dt * 5);
-  if (mode === 'home') { homeT += dt; cam.x = cam.tx + Math.sin(homeT * 0.3) * 0.8; }
-  camPose();
-  sun.position.set(cam.x - 5, 14, 9); sun.target.position.set(cam.x + 1, 0, -1);
+  const sx = (Math.random() - 0.5) * cam.shake * 0.3, sy = (Math.random() - 0.5) * cam.shake * 0.3;
+  if (mode === 'home') { homeT += dt; camPose(camera, cam.x + Math.sin(homeT * 0.25) * 1.2, cam.z * (1.05 + 0.05 * Math.sin(homeT * 0.17)), cam.ly); }
+  else camPose(camera, cam.x, cam.z * (1 - cam.punch), cam.ly, sx, sy);
+  camera.updateMatrixWorld();
+  const px = pathX(cam.x), pz = pathZ(cam.x);
+  sun.position.set(px - 5, 14, pz + 8); sun.target.position.set(px + 1, 0, pz - 1);
 }
 function resize() {
   const w = app.clientWidth, h = app.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
-  const tv = Math.tan(camera.fov * Math.PI / 360);
-  CAM_D = HALF_W / (tv * camera.aspect);           // horizontal fit
-  const halfH = CAM_D * tv; cam.ly = GROUND_Y + 0.8 * halfH; // ground ~10 % above the bottom edge
-  if (L && state) cam.tx = focusX(knifeX());
+  SAFE.t = 1 - 2 * (0.092 * h + 66 + 44 + 14) / h; // keep targets and badges below the top HUD (buttons row)
+  if (L && state) { levelCamera(); camFollow(state.p); }
 }
 window.addEventListener('resize', resize);
 const v3 = new THREE.Vector3();
-function toScreen(x, y, z) { v3.set(x, y, z || 0).project(camera); const r = app.getBoundingClientRect(); return { x: (v3.x + 1) / 2 * r.width, y: (1 - v3.y) / 2 * r.height }; }
+function toScreen(x, y) { W3(x, y, v3).project(camera); return { x: (v3.x + 1) / 2 * app.clientWidth, y: (1 - v3.y) / 2 * app.clientHeight, z: v3.z }; }
 
 // ------------------------------------------------------------------ HUD
 function count() { return L.count(state.cut); }
@@ -518,45 +590,65 @@ function hud() {
   }
 }
 function caption(t, cls) { const c = $('caption'); c.textContent = t; c.className = 'out' + (cls ? ' ' + cls : ''); }
-function defaultCaption() {
-  const n = count();
+function defaultCaption() { // small and optional: only on tutorial levels, or once the finish is open
+  const n = count(); if (LI >= 7 && n < L.need) return '';
   if (n >= L.need) return n >= L.total ? 'ALL SLICED! LAND ON THE FINISH' : 'FINISH OPEN! OR SLICE MORE FOR ⭐';
   return 'SLICE ' + (L.need - n) + ' MORE 🍉 → FINISH';
 }
-function combo(n) { const c = $('combo'); c.textContent = 'x' + n + (n >= 3 ? '!' : ''); c.style.fontSize = Math.min(app.clientWidth / 4.2, 56 + n * 9) + 'px'; c.classList.remove('pop'); void c.offsetWidth; c.classList.add('pop'); }
+// one feedback text at a time, in order, in one slot under the HUD. The caption hides while it shows.
+const FB = { q: [], cur: null, t: 0 };
+function showFb(o) { const c = $('combo'); FB.cur = o; FB.t = o.dur; c.textContent = o.text; c.style.fontSize = o.size + 'px'; c.classList.remove('pop'); void c.offsetWidth; c.classList.add('pop'); $('caption').style.opacity = 0; }
+function feedback(text, size, replaceTag) {
+  const o = { text, size: Math.min(app.clientWidth / 4.4, size), dur: 0.8, tag: replaceTag || null };
+  if (FB.cur && replaceTag && FB.cur.tag === replaceTag) { showFb(o); return; } // the combo counter updates in place
+  if (!FB.cur) showFb(o); else FB.q.push(o);
+}
+function updateFb(rdt) { $('badges').classList.toggle('hide', mode === 'fly' || !!FB.cur); if (!FB.cur) return; FB.t -= rdt; if (FB.t > 0) return; FB.cur = null; if (FB.q.length) showFb(FB.q.shift()); else $('caption').style.opacity = 1; }
+function clearFb() { FB.q.length = 0; FB.cur = null; $('combo').classList.remove('pop'); $('caption').style.opacity = 1; }
+function combo(n) { feedback('x' + n + (n >= 3 ? '!' : ''), 52 + n * 8, 'combo'); }
 function bump(id) { const e = $(id); e.classList.remove('bump'); void e.offsetWidth; e.classList.add('bump'); }
 
 // ------------------------------------------------------------------ outcome badges (always on: every legal tap shows what it gives)
 let badgeEls = [], selBadge = null;
 function moveInfo(b) { return L.move(state, b); }
-function rebuildBadges() {
-  const box = $('badges'); box.innerHTML = ''; badgeEls = [];
+function rebuildBadges() { // discreet: only on reachable targets, only while idle (they fade out while the knife flies)
+  const box = $('badges'); box.innerHTML = ''; badgeEls = []; box.classList.remove('hide');
   if (mode !== 'ready' && mode !== 'aim') return;
   for (let b = state.p - R; b <= state.p + R; b++) {
     if (b < 0 || b >= L.W || b === state.p) continue;
-    const m = moveInfo(b); const k = L.kind(b); let el = null;
+    const m = moveInfo(b); let el = null;
     if (m.ok) {
       el = document.createElement('div');
       const bounce = m.segs.length > 1;
       if (m.win) { el.className = 'bdg fin'; el.innerHTML = 'GO'; }
       else if (m.gain) { el.className = 'bdg' + (bounce ? ' bnc' : ''); el.innerHTML = (bounce ? '&#x21B7;' : '') + '+' + m.gain; }
       else if (bounce) { el.className = 'bdg bnc'; el.innerHTML = '&#x21B7;'; }
-      else { el.className = 'bdg ring'; el.innerHTML = '<i></i>'; }
+      else { el.className = 'bdg ring'; el.innerHTML = '<i></i>'; } // plain spot: ring only while pressing
     } else if (m.why === 'locked') { el = document.createElement('div'); el.className = 'bdg lock'; el.innerHTML = '&#x1F512;' + m.need; }
     if (!el) continue;
-    box.appendChild(el); badgeEls.push({ el, b, top: L.top(b, state.cut) });
+    box.appendChild(el); badgeEls.push({ el, b, top: L.top(b, state.cut), ring: el.classList.contains('ring') });
   }
   placeBadges();
 }
-function placeBadges() {
-  for (const o of badgeEls) { const s = toScreen(o.b, o.top + 0.12); o.el.style.left = s.x + 'px'; o.el.style.top = (s.y - (o.el.classList.contains('ring') ? 0 : 8)) + 'px'; }
+function placeBadges() { // billboarded HTML badges above each target; nudged up so two never overlap
+  const aimOn = $('badges').classList.contains('aim');
+  const list = badgeEls.map(o => { const sc = toScreen(o.b, Math.max(L.h(o.b), o.top) + 0.1); const w = o.el.offsetWidth || 28, h = o.el.offsetHeight || 22; return { o, x: sc.x, y: sc.y - (o.ring ? 0 : 4), w, h, z: sc.z }; });
+  list.sort((a, b) => b.y - a.y);
+  const placed = [];
+  for (const it of list) {
+    const vis = !it.o.ring || aimOn;
+    if (vis) for (let k = 0; k < 6; k++) { const hit = placed.find(q => Math.abs(q.x - it.x) < (q.w + it.w) / 2 + 2 && Math.abs(q.y - it.y) < (q.h + it.h) / 2 + 2); if (!hit) break; it.y = hit.y - hit.h - 3; }
+    it.o.el.style.left = it.x + 'px'; it.o.el.style.top = it.y + 'px';
+    it.o.vis = vis; it.o.rect = { l: it.x - it.w / 2, r: it.x + it.w / 2, t: it.y - it.h, b: it.y };
+    if (vis) placed.push(it);
+  }
 }
 function selectBadge(b) { for (const o of badgeEls) { o.el.classList.toggle('sel', o.b === b); o.el.classList.toggle('dim', b != null && o.b !== b); } }
 
 function updateFinTag() { // the finish always says if it is open, and how many melons are missing
   const t = $('finTag'); const u = levelRoot && levelRoot.userData;
-  if (!u || !u.finish || mode === 'home' || badgeEls.some(o => o.b === u.finish[0])) { t.style.display = 'none'; return; }
-  const [x, h] = u.finish; const s = toScreen(x, h + 0.15); const short = L.need - count();
+  if (!u || !u.finish || mode === 'home' || mode === 'fly' || mode === 'over' || badgeEls.some(o => o.b === u.finish[0])) { t.style.display = 'none'; return; }
+  const [x, h] = u.finish; const s = toScreen(x, h + 0.2); const short = L.need - count();
   if (s.x < 10 || s.x > app.clientWidth - 10) { t.style.display = 'none'; return; }
   t.style.display = 'block'; t.style.left = s.x + 'px'; t.style.top = (s.y - 6) + 'px';
   t.className = short > 0 ? '' : 'open'; t.innerHTML = short > 0 ? '&#x1F512; ' + short + ' &#x1F349;' : 'FINISH';
@@ -566,13 +658,13 @@ let mode = 'ready', aim = null, fly = null, timeScale = 1, overT = 0, pending = 
 function knifeX() { return state.p; }
 function loadLevel(i) {
   LI = (i + LEVELS.length) % LEVELS.length; const def = LEVELS[LI];
-  L = new Level(def); state = L.start(); used = 0; hist = [];
+  L = new Level(def); state = L.start(); used = 0; hist = []; curvePh = LI * 1.7 + 0.4;
   buildLevel();
   for (const h of halves) scene.remove(h.g); halves.length = 0;
   for (const p of parts) if (p.m) scene.remove(p.m); parts.length = 0;
   knife.visible = true; knifeLean = -0.12; wobT = 9; placeKnifeAt(state.p, L.h(state.p), knifeLean);
-  cam.tx = cam.x = focusX(state.p);
-  mode = 'ready'; aim = null; fly = null; timeScale = 1; pending = null; clearPreview();
+  levelCamera(); camFollow(state.p); cam.x = cam.tx; cam.ly = cam.tly; cam.z = cam.tz;
+  mode = 'ready'; aim = null; fly = null; timeScale = 1; pending = null; clearPreview(); clearFb();
   ['win', 'lose'].forEach(id => $(id).classList.remove('show'));
   const t = $('tip'); if (def.tip) { t.textContent = def.tip; t.style.display = 'block'; } else t.style.display = 'none';
   caption(defaultCaption()); refreshFinish(); store.set('last', LI); hud(); updateCamera(0.016); rebuildBadges();
@@ -588,7 +680,7 @@ function drawArcDots(arc, red, upTo, di) {
   for (let k = 1; k <= N && di < dots.length; k++) {
     const t = k / N; if (upTo != null && t > upTo) break;
     const x = arc.x(t), y = arc.y(t); acc += Math.hypot(x - px, y - py); px = x; py = y;
-    if (acc >= 0.26) { acc = 0; const d = dots[di++]; d.visible = true; d.material = red ? dotRed : dotMat; d.position.set(x, y, 0.5); d.scale.setScalar(k > N - 8 ? 0.7 : 1); }
+    if (acc >= 0.26) { acc = 0; const d = dots[di++]; d.visible = true; d.material = red ? dotRed : dotMat; W3(x, y, d.position); d.scale.setScalar(k > N - 8 ? 0.7 : 1); }
   }
   return di;
 }
@@ -604,14 +696,14 @@ function showPreview(b) {
     const tb = s.tb != null ? s.tb : L.top(s.b, state.cut) < 0 ? 0 : L.top(s.b, state.cut);
     const arc = arcFor(s.a, s.ha, s.b, Math.max(0, tb));
     for (let i = 0; i < m.segs.length - 1; i++) { const q = m.segs[i]; di = drawArcDots(arcFor(q.a, q.ha, q.b, q.tb), false, null, di); }
-    if (m.why === 'wall' && s.wall != null) { const t = (s.wall - 0.45 - s.a) / (s.b - s.a); di = drawArcDots(arc, true, Math.abs(t), di); const top = L.top(s.wall, state.cut); wallGlow.visible = true; wallGlow.scale.y = top - GROUND_Y + 0.1; wallGlow.position.set(s.wall, (top + GROUND_Y) / 2, 0); xMark.visible = true; xMark.position.set(s.wall, top + 0.5, 0.6); }
-    else if (m.why === 'high') { const yMax = s.ha + RULES.UP; const a2 = arcFor(s.a, s.ha, s.b - 0.45 * Math.sign(s.b - s.a), yMax); di = drawArcDots(a2, true, null, di); xMark.visible = true; xMark.position.set(s.b - 0.45 * Math.sign(s.b - s.a), yMax, 0.6); }
-    else if (m.why !== 'far' && m.why !== 'off') { di = drawArcDots(arc, true, null, di); xMark.visible = true; xMark.position.set(s.b, Math.max(0, tb) + 0.45, 0.6); }
+    if (m.why === 'wall' && s.wall != null) { const t = (s.wall - 0.45 - s.a) / (s.b - s.a); di = drawArcDots(arc, true, Math.abs(t), di); const top = L.top(s.wall, state.cut); wallGlow.visible = true; wallGlow.scale.y = top - GROUND_Y + 0.1; W3(s.wall, (top + GROUND_Y) / 2, wallGlow.position); wallGlow.rotation.y = pathYaw(s.wall); xMark.visible = true; W3(s.wall, top + 0.5, xMark.position); }
+    else if (m.why === 'high') { const yMax = s.ha + RULES.UP; const a2 = arcFor(s.a, s.ha, s.b - 0.45 * Math.sign(s.b - s.a), yMax); di = drawArcDots(a2, true, null, di); xMark.visible = true; W3(s.b - 0.45 * Math.sign(s.b - s.a), yMax, xMark.position); }
+    else if (m.why !== 'far' && m.why !== 'off') { di = drawArcDots(arc, true, null, di); xMark.visible = true; W3(s.b, Math.max(0, tb) + 0.45, xMark.position); }
     caption(WHY[m.why] || 'BLOCKED', 'warn'); return;
   }
   aim.ok = true;
   for (const s of m.segs) di = drawArcDots(arcFor(s.a, s.ha, s.b, s.tb), false, null, di);
-  if (m.dive) { const [x, n] = m.dive; for (let j = 0; j < n && j < halos.length; j++) { const ob = melons[x + ',' + (L.stack[x] - 1 - j)]; if (!ob) continue; const hm = halos[j]; hm.visible = true; hm.position.copy(ob.mesh.position); hm.position.z += 0.1; } }
+  if (m.dive) { const [x, n] = m.dive; for (let j = 0; j < n && j < halos.length; j++) { const ob = melons[x + ',' + (L.stack[x] - 1 - j)]; if (!ob) continue; const hm = halos[j]; hm.visible = true; hm.position.copy(ob.mesh.position); } }
   const bounce = m.segs.length > 1 ? 'BOUNCE! ' : '';
   if (m.win) caption(bounce + 'FINISH! ' + (L.count(m.cut) >= L.total ? '⭐⭐⭐' : L.count(m.cut) >= Math.ceil((L.need + L.total) / 2) ? '⭐⭐' : '⭐'), 'good');
   else if (m.gain) caption(bounce + 'SLICE ' + m.gain + ' 🍉' + (m.gain >= 2 ? ' IN ONE GO!' : ''), 'good');
@@ -626,7 +718,7 @@ function release() {
 function startFlight(b, m) {
   hist.push({ state: Object.assign({}, state), used });
   used++; $('tip').style.display = 'none'; bump('flips'); hud();
-  $('badges').innerHTML = ''; badgeEls = [];
+  $('badges').classList.add('hide'); $('badges').classList.remove('aim');
   const segs = m.segs.map(s => { const dx = Math.abs(s.b - s.a); return { s, arc: arcFor(s.a, s.ha, s.b, s.tb), T: 0.48 + 0.1 * dx, rot: dx < 2 ? 1 : 2, dir: Math.sign(s.b - s.a) }; });
   fly = { segs, i: 0, t: 0, m, phase: 'arc', dive: m.dive ? { x: m.dive[0], n: m.dive[1], k: 0, y: segs[segs.length - 1].s.tb } : null };
   mode = 'fly'; caption(''); cam.punch = 0.04;
@@ -639,7 +731,7 @@ function updateFlight(dt) {
     const x = g.arc.x(u), y = g.arc.y(u);
     const spin = -g.dir * Math.PI * 2 * g.rot * easeSpin(u);
     placeKnifeAt(x, y, spin + (fly.i === 0 ? knifeLean * (1 - u) : 0));
-    cam.tx = focusX(x);
+    camFly(x);
     if (u >= 1) {
       if (fly.i < fly.segs.length - 1) { // bounce pad
         SFX.clang(); shake(0.3); const pad = levelRoot.userData['pad' + g.s.b]; if (pad) pad.scale.y = 0.3;
@@ -671,10 +763,10 @@ function land() {
   knifeLean = -0.12 * last.dir; wobT = 0; placeKnifeAt(state.p, L.h(state.p), knifeLean); timeScale = 1;
   SFX.thunk(); shake(0.3 + (fly.dive ? 0.1 * fly.dive.n : 0));
   burst(state.p, L.h(state.p) + 0.05, 0.3, 10, L.kind(state.p) === 'F' ? [0xf0b866, 0xffffff] : [0xd9a25a, 0xf2c57e, 0x9b6a3a], { speed: 1.6, size: 0.05, life: 0.5, up: 0.9, cube: true });
-  if (fly.dive && fly.dive.n >= 3) caption(['', '', '', 'NICE!', 'GREAT!', 'AMAZING!', 'INSANE!', 'LEGENDARY!'][Math.min(7, fly.dive.n)], 'good');
+  if (fly.dive && fly.dive.n >= 3) feedback(['', '', '', 'NICE!', 'GREAT!', 'AMAZING!', 'INSANE!', 'LEGENDARY!'][Math.min(7, fly.dive.n)], 50);
   fly = null; refreshFinish(true); hud();
   if (m.win) { mode = 'over'; overT = 0.9; pending = win; SFX.win(); confetti(); return; }
-  cam.tx = focusX(state.p);
+  camFollow(state.p);
   const noMove = L.moves(state).length === 0;
   if (used >= L.K || noMove) {
     const short = Math.max(0, L.need - count());
@@ -684,45 +776,60 @@ function land() {
       oneAway ? 'The finish was one flip away. Undo and save a flip!' : (short ? 'Only ' + short + ' 🍉 short. Undo and try a bigger stack.' : 'Plan the climb: slicing takes you down.'));
     return;
   }
-  mode = 'ready'; if (!fly) { if (!$('caption').classList.contains('good')) caption(defaultCaption()); else setTimeout(() => { if (mode === 'ready' && !aim) caption(defaultCaption()); }, 900); }
+  mode = 'ready'; caption(defaultCaption());
   rebuildBadges();
 }
 function confetti() { const x = state.p, y = L.h(state.p) + 1.2; burst(x, y, 0.3, 80, [0xff3b6b, 0xffd21a, 0x2fbf4f, 0x2563e8, 0xff9a1f, 0xffffff], { speed: 5, size: 0.09, life: 2.2, up: 1.1, cube: true, g: 5 }); }
 function starsOf() { return L.stars(state); }
 function win() {
+  clearFb(); caption('');
   const s = starsOf(); const best = store.get('stars', {}); best[LI] = Math.max(best[LI] || 0, s); store.set('stars', best);
   $('winStars').innerHTML = [1, 2, 3].map(i => '<span class="' + (i <= s ? '' : 'off') + '">⭐</span>').join('');
   $('winSub').textContent = count() + ' 🍉 sliced (' + L.total + ' on the level) • ' + used + '/' + L.K + ' flips';
   $('win').classList.add('show'); hud();
 }
-function lose(t, sub) { SFX.lose(); $('loseTitle').textContent = t; $('loseSub').textContent = sub; $('bUndoL').style.display = hist.length ? '' : 'none'; $('lose').classList.add('show'); }
+function lose(t, sub) { clearFb(); caption(''); SFX.lose(); $('loseTitle').textContent = t; $('loseSub').textContent = sub; $('bUndoL').style.display = hist.length ? '' : 'none'; $('lose').classList.add('show'); }
 function undo() {
   if (!hist.length || (mode !== 'ready' && mode !== 'over')) return; const sn = hist.pop();
   state = sn.state; used = sn.used;
   for (const k in melons) { const o = melons[k]; const was = !!(L.stack[o.x] && (state.cut >> L.sid[o.x] & 1)); if (o.sliced && !was) { o.sliced = false; o.mesh.visible = true; o.mesh.scale.setScalar(0.01); o.grow = 0; } }
   knife.visible = true; knifeLean = -0.12; wobT = 9; placeKnifeAt(state.p, L.h(state.p), knifeLean);
-  $('lose').classList.remove('show'); mode = 'ready'; pending = null; cam.tx = focusX(state.p); refreshFinish(); hud(); caption(defaultCaption()); rebuildBadges();
+  $('lose').classList.remove('show'); mode = 'ready'; pending = null; camFollow(state.p); refreshFinish(); hud(); caption(defaultCaption()); rebuildBadges();
 }
 
 // ------------------------------------------------------------------ input: press = preview, release = flip. A quick tap just flips.
-function pick(cx) { // nearest column by screen x (whole column is the target, ground to sky)
-  const r = app.getBoundingClientRect(); const px = cx - r.left; let best = null, bd = 1e9;
-  for (let b = 0; b < L.W; b++) { const s = toScreen(b, 1); const d = Math.abs(px - s.x); if (d < bd) { bd = d; best = b; } }
-  const pitch = Math.abs(toScreen(1, 1).x - toScreen(0, 1).x);
-  return bd < pitch * 0.55 ? best : null;
+// Generous hit areas: a badge (padded), or anywhere on a column's screen silhouette (ground to top of its stack,
+// widened). When silhouettes overlap, a legal target wins over a non-legal one, then the column nearest the camera.
+const rtv = new THREE.Vector3(), wv = new THREE.Vector3();
+function sil(b) {
+  const top = Math.max(L.h(b), L.top(b, state.cut)) + 0.4;
+  const g = toScreen(b, GROUND_Y), t = toScreen(b, top), mid = (top + GROUND_Y) / 2;
+  rtv.setFromMatrixColumn(camera.matrixWorld, 0); W3(b, mid, wv).addScaledVector(rtv, 0.44).project(camera);
+  const c = toScreen(b, mid); const rad = Math.max(24, 1.25 * Math.hypot((wv.x + 1) / 2 * app.clientWidth - c.x, (1 - wv.y) / 2 * app.clientHeight - c.y));
+  return { g, t, rad, depth: c.z };
+}
+function segDist(px, py, a, b) { const dx = b.x - a.x, dy = b.y - a.y, l = dx * dx + dy * dy || 1; const u = Math.max(0, Math.min(1, ((px - a.x) * dx + (py - a.y) * dy) / l)); return Math.hypot(px - a.x - dx * u, py - a.y - dy * u); }
+function legal(b) { if (b === state.p || Math.abs(b - state.p) > R) return false; const m = moveInfo(b); return m.ok || m.why === 'locked'; }
+function pick(cx, cy) {
+  const r = app.getBoundingClientRect(); const px = cx - r.left, py = cy - r.top;
+  for (const o of badgeEls) { if (!o.vis || !o.rect) continue; const q = o.rect; if (px >= q.l - 12 && px <= q.r + 12 && py >= q.t - 12 && py <= q.b + 10) return o.b; }
+  const inside = []; let near = null, nd = 1e9;
+  for (let b = 0; b < L.W; b++) { const sl = sil(b); const sc = segDist(px, py, sl.g, sl.t) / sl.rad; if (sc <= 1) inside.push({ b, depth: sl.depth, lg: legal(b) }); else if (sc < nd && legal(b)) { nd = sc; near = b; } }
+  if (inside.length) { inside.sort((a, b) => (b.lg - a.lg) || (a.depth - b.depth)); return inside[0].b; }
+  return nd <= 1.7 ? near : null;
 }
 let pid = null;
 canvas.addEventListener('pointerdown', e => {
   audio(); if (mode !== 'ready' || pid !== null) return;
   pid = e.pointerId; try { canvas.setPointerCapture(pid); } catch (er) {}
-  mode = 'aim'; aim = { b: null }; hideHand = true;
-  const b = pick(e.clientX); showPreview(b === state.p ? null : b); if (aim.b != null) SFX.tick();
+  clearFb(); mode = 'aim'; aim = { b: null }; hideHand = true; $('badges').classList.add('aim'); placeBadges();
+  const b = pick(e.clientX, e.clientY); showPreview(b === state.p ? null : b); if (aim.b != null) SFX.tick();
 });
 canvas.addEventListener('pointermove', e => {
   if (e.pointerId !== pid || mode !== 'aim') return;
-  let b = pick(e.clientX); if (b === state.p) b = null; if (b !== aim.b) { showPreview(b); if (b != null) SFX.tick(); }
+  let b = pick(e.clientX, e.clientY); if (b === state.p) b = null; if (b !== aim.b) { showPreview(b); if (b != null) SFX.tick(); }
 });
-function up(e) { if (e.pointerId !== pid) return; pid = null; if (mode === 'aim') release(); }
+function up(e) { if (e.pointerId !== pid) return; pid = null; $('badges').classList.remove('aim'); if (mode === 'aim') release(); }
 canvas.addEventListener('pointerup', up); canvas.addEventListener('pointercancel', up);
 $('bNext').onclick = () => { audio(); loadLevel(LI + 1); };
 $('bRetry').onclick = () => { audio(); loadLevel(LI); };
@@ -770,8 +877,8 @@ function frame(now) {
   if (mode === 'fly' && fly) updateFlight(dt);
   if ((mode === 'ready' || mode === 'aim') && knife.visible) { wobT += rdt; const w = 0.22 * Math.exp(-wobT * 7) * Math.sin(wobT * 34); placeKnifeAt(state.p, L.h(state.p), knifeLean + w); }
   if (mode === 'over' && pending) { overT -= rdt; if (overT <= 0) { const p = pending; pending = null; p(); } }
-  halos.forEach((h, i) => { if (h.visible) h.scale.setScalar(1 + 0.07 * Math.sin(T * 9 + i)); });
-  if (xMark.visible) xMark.scale.setScalar(1 + 0.1 * Math.sin(T * 12));
+  halos.forEach((h, i) => { if (h.visible) { h.quaternion.copy(camera.quaternion); h.scale.setScalar(1 + 0.07 * Math.sin(T * 9 + i)); } });
+  if (xMark.visible) { xMark.quaternion.copy(camera.quaternion); xMark.scale.setScalar(1 + 0.1 * Math.sin(T * 12)); }
   if (wallGlow.visible) wallGlow.material.opacity = 0.25 + 0.15 * Math.sin(T * 10);
   if (levelRoot) { for (const k in levelRoot.userData) if (k.startsWith('pad')) { const p = levelRoot.userData[k]; p.scale.y += (1 - p.scale.y) * Math.min(1, rdt * 8); } }
   if (levelRoot && levelRoot.userData.flag && levelRoot.userData.flag.visible) { const f = levelRoot.userData.flag, pa = f.geometry.attributes.position; for (let i = 0; i < pa.count; i++) { const x = pa.getX(i) + 0.27; pa.setZ(i, Math.sin(T * 6 - x * 9) * 0.05 * x * 2); } pa.needsUpdate = true; }
@@ -790,7 +897,7 @@ function frame(now) {
     if (h.t > 1.1) { const s = Math.max(0, 1 - (h.t - 1.1) * 3); h.g.scale.setScalar(s); if (s <= 0) { scene.remove(h.g); halves.splice(i, 1); } }
   }
   for (const k in melons) { const o = melons[k]; if (o.grow != null) { o.grow = Math.min(1, o.grow + rdt * 4); o.mesh.scale.setScalar(o.grow < 1 ? 1.15 * Math.sin(o.grow * 2.2) / Math.sin(2.2) : 1); if (o.grow >= 1) o.grow = null; } }
-  updateCamera(rdt); placeBadges(); updateHand(); updateFinTag();
+  updateCamera(rdt); updateFb(rdt); placeBadges(); updateHand(); updateFinTag();
   renderer.render(scene, camera);
   requestAnimationFrame(frame);
 }
@@ -801,7 +908,23 @@ window.__fs = {
   get state() { return Object.assign({}, state); }, get won() { return L.won(state); }, get nLevels() { return LEVELS.length; }, get count() { return count(); }, get stars() { return L.stars(state); },
   solution(i) { return LEVELS[i == null ? LI : i].solution.slice(); },
   moves() { return L.moves(state).map(m => ({ tap: m.tap, gain: m.m.gain, win: !!m.m.win })); },
-  colScreen(b) { const r = app.getBoundingClientRect(); const s = toScreen(b, Math.max(0, L.top(b, state.cut)) + 0.3); return { x: s.x + r.left, y: s.y + r.top }; },
+  colScreen(b) { // a point a player would tap: the badge if one shows, else the column body
+    const r = app.getBoundingClientRect(); const o = badgeEls.find(q => q.b === b && q.vis && q.rect);
+    if (o) return { x: (o.rect.l + o.rect.r) / 2 + r.left, y: (o.rect.t + o.rect.b) / 2 + r.top, via: 'badge' };
+    return this.colBody(b) || (() => { const s = toScreen(b, Math.max(L.h(b), L.top(b, state.cut)) + 0.3); return { x: s.x + r.left, y: s.y + r.top, via: 'top' }; })();
+  },
+  colBody(b) { // a point on the column's visible silhouette (log / stack body) that selects it, or null if fully hidden
+    const r = app.getBoundingClientRect(); const top = Math.max(L.h(b), L.top(b, state.cut));
+    for (const f of [0.55, 0.75, 0.35, 0.9, 0.2, 1.0]) { const s = toScreen(b, GROUND_Y + (top - GROUND_Y) * f); if (s.y < 0 || s.y > app.clientHeight) continue;
+      const save = badgeEls.map(o => o.vis); badgeEls.forEach(o => o.vis = false); const got = pick(s.x + r.left, s.y + r.top); badgeEls.forEach((o, i) => o.vis = save[i]);
+      if (got === b && !badgeEls.some(o => o.vis && o.rect && s.x >= o.rect.l - 12 && s.x <= o.rect.r + 12 && s.y >= o.rect.t - 12 && s.y <= o.rect.b + 10)) return { x: s.x + r.left, y: s.y + r.top, via: 'body' }; }
+    return null;
+  },
+  pickAt(x, y) { return pick(x, y); },
+  hudRects() { const ids = ['dots', 'flips', 'melons', 'stars3', 'btns', 'tip', 'caption', 'combo', 'finTag']; const out = {}; ids.forEach(id => { const e = $(id); const cs = getComputedStyle(e); if (cs.display === 'none' || +cs.opacity < 0.05 || !e.textContent.trim() && id !== 'btns') return; const q = e.getBoundingClientRect(); if (q.width && q.height) out[id] = { l: q.left, t: q.top, r: q.right, b: q.bottom }; }); return out; },
+  badgeRects() { if ($('badges').classList.contains('hide')) return []; return badgeEls.filter(o => o.vis && o.rect).map(o => ({ col: o.b, ...o.rect })); },
+  colPx(b) { const sl = sil(b); return { rad: sl.rad, h: Math.hypot(sl.t.x - sl.g.x, sl.t.y - sl.g.y) }; },
+  get cam() { return { z: cam.z, x: cam.x, ly: cam.ly, zs: camZ.map(v => +v.toFixed(2)) }; },
   badges() { return badgeEls.map(o => ({ b: o.b, text: o.el.textContent, cls: o.el.className })); },
   load(i) { loadLevel(i); }
 };
