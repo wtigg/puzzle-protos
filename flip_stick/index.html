@@ -831,8 +831,8 @@ let pid = null;
 canvas.addEventListener('pointerdown', e => {
   audio(); if (mode !== 'ready' || pid !== null) return;
   pid = e.pointerId; try { canvas.setPointerCapture(pid); } catch (er) {}
-  clearFb(); mode = 'aim'; aim = { b: null }; hideHand = true; $('badges').classList.add('aim'); placeBadges();
-  const b = pick(e.clientX, e.clientY); showPreview(b === state.p ? null : b); if (aim.b != null) SFX.tick();
+  const b = pick(e.clientX, e.clientY); // pick first: the press-only rings must not steal the tap that made them appear
+  clearFb(); mode = 'aim'; aim = { b: null }; hideHand = true; $('badges').classList.add('aim'); placeBadges(); showPreview(b === state.p ? null : b); if (aim.b != null) SFX.tick();
   else if (guidedTarget() != null) { caption('TAP WHERE THE HAND POINTS', 'warn'); SFX.bad(); }
 });
 canvas.addEventListener('pointermove', e => {
@@ -881,7 +881,7 @@ function updateHand() {
 // ------------------------------------------------------------------ loop
 let last = performance.now(), T = 0;
 function frame(now) {
-  const rdt = Math.min(0.05, (now - last) / 1000); last = now;
+  const rawDt = (now - last) / 1000; const rdt = Math.min(0.05, rawDt); last = now; window.__fps = Math.round(0.9 * (window.__fps || 60) + 0.1 / Math.max(rawDt, 0.001));
   if (timeScale < 1 && !(fly && fly.phase === 'dive')) timeScale += (1 - timeScale) * Math.min(1, rdt * 6);
   const dt = rdt * timeScale; T += rdt;
   if (mode === 'fly' && fly) updateFlight(dt);
@@ -907,7 +907,7 @@ function frame(now) {
     if (h.t > 1.1) { const s = Math.max(0, 1 - (h.t - 1.1) * 3); h.g.scale.setScalar(s); if (s <= 0) { scene.remove(h.g); halves.splice(i, 1); } }
   }
   for (const k in melons) { const o = melons[k]; if (o.grow != null) { o.grow = Math.min(1, o.grow + rdt * 4); o.mesh.scale.setScalar(o.grow < 1 ? 1.15 * Math.sin(o.grow * 2.2) / Math.sin(2.2) : 1); if (o.grow >= 1) o.grow = null; } }
-  updateCamera(rdt); updateFb(rdt); placeBadges(); updateHand(); updateFinTag();
+  updateCamera(Math.min(0.25, rawDt)); updateFb(rdt); // camera eases in real time, so it settles even when frames are slow placeBadges(); updateHand(); updateFinTag();
   renderer.render(scene, camera);
   requestAnimationFrame(frame);
 }
